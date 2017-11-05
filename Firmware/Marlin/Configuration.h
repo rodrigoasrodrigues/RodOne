@@ -702,7 +702,7 @@
  */
 #define X_PROBE_OFFSET_FROM_EXTRUDER 40  // X offset: -left  +right  [of the nozzle]
 #define Y_PROBE_OFFSET_FROM_EXTRUDER 5  // Y offset: -front +behind [the nozzle]
-#define Z_PROBE_OFFSET_FROM_EXTRUDER -0.05   // Z offset: -below +above  [the nozzle]
+#define Z_PROBE_OFFSET_FROM_EXTRUDER -0.2    // Z offset: -below +above  [the nozzle]
 
 // X and Y axis travel speed (mm/m) between probes
 //#define XY_PROBE_SPEED 8000
@@ -797,11 +797,11 @@
 // @section machine
 
 // The size of the print bed
-#define X_BED_SIZE 187
-#define Y_BED_SIZE 195
+#define X_BED_SIZE 192
+#define Y_BED_SIZE 190
 
 // Travel limits (mm) after homing, corresponding to endstop positions.
-#define X_MIN_POS 0
+#define X_MIN_POS -19
 #define Y_MIN_POS 0
 #define Z_MIN_POS 0
 #define X_MAX_POS X_BED_SIZE
@@ -809,7 +809,7 @@
 #define Z_MAX_POS 100
 
 // If enabled, axes won't move below MIN_POS in response to movement commands.
-#define MIN_SOFTWARE_ENDSTOPS
+//#define MIN_SOFTWARE_ENDSTOPS
 // If enabled, axes won't move above MAX_POS in response to movement commands.
 #define MAX_SOFTWARE_ENDSTOPS
 
@@ -898,8 +898,8 @@
   #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
 
   // Set the boundaries for probing (where the probe can reach).
-  #define LEFT_PROBE_BED_POSITION 40
-  #define RIGHT_PROBE_BED_POSITION 180
+  #define LEFT_PROBE_BED_POSITION 21
+  #define RIGHT_PROBE_BED_POSITION 185
   #define FRONT_PROBE_BED_POSITION 5
   #define BACK_PROBE_BED_POSITION 185
 
