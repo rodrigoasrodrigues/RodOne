@@ -44,6 +44,11 @@ carriage_screw = 4.5;
 tool_h = 10;
 tool_w = 5;
 
+//reinforcement
+re_width = 5;
+re_length = 10;
+
+
 translate([50,0,0]){
     difference(){
     piece();
@@ -61,6 +66,13 @@ translate([50,0,0]){
 
 
 module piece(){
+    
+        //reinforcement
+    translate([-re_width/2,carriage_length/2-re_length-tool_w,holder_h])
+        prism(re_width,re_length,tool_h);
+    
+    translate([-re_width/2,-carriage_length/2+re_length+tool_w,holder_h])
+        prism(re_width,-re_length,tool_h);
 difference(){
     group(){
         translate([-holder_w/2,-carriage_length/2,0]){
@@ -71,6 +83,7 @@ difference(){
             toolfix();
         translate([-holder_w/2,-carriage_length/2,0])
             toolfix();
+        
     }
     HotEnd();
    
@@ -148,3 +161,11 @@ module nut(){
 module screwhead(){
     cylinder(h=nut_h,d=nut_h,$fn=fn);
 }
+
+module prism(l, w, h){
+       polyhedron(
+               points=[[0,0,0], [l,0,0], [l,w,0], [0,w,0], [0,w,h], [l,w,h]],
+               faces=[[0,1,2,3],[5,4,3,2],[0,4,5,1],[0,3,4],[5,2,1]]
+               );
+     
+       }
