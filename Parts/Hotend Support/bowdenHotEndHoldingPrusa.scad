@@ -41,7 +41,7 @@ carriage_distance = 48.5;
 carriage_screw = 4.5;
 
 //tool
-tool_h = 10;
+tool_h = 25;
 tool_w = 5;
 
 //reinforcement
@@ -144,11 +144,22 @@ module HotEnd(){
 module toolfix(){
     difference(){
         cube([holder_w,tool_w,holder_h+tool_h]);
-        translate([holder_w/4,0,holder_h+tool_h/2])
+        //lower holes
+        translate([holder_w/4,0,holder_h+tool_h/4])
             rotate([-90,0,0])
                 cylinder(d=screw_w,h=screw_h,$fn=fn);
         
-        translate([holder_w*3/4,0,holder_h+tool_h/2])
+        translate([holder_w*3/4,0,holder_h+tool_h/4])
+            rotate([-90,0,0])
+                cylinder(d=screw_w,h=screw_h,$fn=fn);
+        
+        
+        //higher holes
+        translate([holder_w/4,0,holder_h+tool_h*3/4])
+            rotate([-90,0,0])
+                cylinder(d=screw_w,h=screw_h,$fn=fn);
+        
+        translate([holder_w*3/4,0,holder_h+tool_h*3/4])
             rotate([-90,0,0])
                 cylinder(d=screw_w,h=screw_h,$fn=fn);
     }
