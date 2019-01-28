@@ -10,12 +10,12 @@ screw_w = 3.5;
 screw_h =100;
 
 //tool
-tool_h = 10;
+tool_h = 25;
 tool_w = 5;
 
 //sensor
 //sensor 8mm
-sensor_d=8;
+sensor_d=8.5;
 sensor_depth = 45;
 
 //sensor 18mm
@@ -31,19 +31,25 @@ sensor_distance=10;
 
 difference(){
 group(){
-translate([-holder_w/2,0,0]){
-    //fixation
-    translate([0,0,sensor_depth]) toolfix();
-    cube([holder_w,tool_w,sensor_depth]);
-    //support
-    translate([holder_w,0,0])
+    translate([-holder_w/2,0,0]){
+        //fixation
+        translate([0,0,sensor_depth]) toolfix();
+        cube([holder_w,tool_w,sensor_depth]);
+        //support
+        translate([holder_w,0,0])
         rotate([0,0,180]) 
             trapezoid(holder_w, sensor_d+sensor_margin*2, sensor_distance,tool_w);
-    
+        
+        translate([holder_w,0,sensor_depth/4])
+        rotate([0,0,180]) 
+            trapezoid(holder_w, sensor_d+sensor_margin*2, sensor_distance,tool_w);
     }
     //rouded support
-translate([0,-sensor_distance,0])
-    cylinder(d=sensor_d+sensor_margin*2,h=tool_w,$fn=fn);
+    translate([0,-sensor_distance,0])
+        cylinder(d=sensor_d+sensor_margin*2,h=tool_w,$fn=fn);
+    
+    translate([0,-sensor_distance,sensor_depth/4])
+        cylinder(d=sensor_d+sensor_margin*2,h=tool_w,$fn=fn);
 }
     
 //sensor
@@ -53,7 +59,7 @@ translate([0,-sensor_distance,0])
 
 //sensor cable
 
-translate([0,0,sensor_depth*2/3])
+translate([0,0,sensor_depth*3/4])
     rotate([-90,0,0])
         sensor();
 
@@ -70,11 +76,22 @@ module sensor(){
 module toolfix(){
     difference(){
         cube([holder_w,tool_w,holder_h+tool_h]);
-        translate([holder_w/4,0,holder_h+tool_h/2])
+        //lower holes
+        translate([holder_w/4,0,holder_h+tool_h/4])
             rotate([-90,0,0])
                 cylinder(d=screw_w,h=screw_h,$fn=fn);
         
-        translate([holder_w*3/4,0,holder_h+tool_h/2])
+        translate([holder_w*3/4,0,holder_h+tool_h/4])
+            rotate([-90,0,0])
+                cylinder(d=screw_w,h=screw_h,$fn=fn);
+        
+        
+        //higher holes
+        translate([holder_w/4,0,holder_h+tool_h*3/4])
+            rotate([-90,0,0])
+                cylinder(d=screw_w,h=screw_h,$fn=fn);
+        
+        translate([holder_w*3/4,0,holder_h+tool_h*3/4])
             rotate([-90,0,0])
                 cylinder(d=screw_w,h=screw_h,$fn=fn);
     }
