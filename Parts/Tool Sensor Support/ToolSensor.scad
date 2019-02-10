@@ -25,7 +25,7 @@ sensor_depth = 45;
 
 sensor_h=30;
 
-sensor_margin = 3;
+sensor_margin = 6;
 //sensor_distance = 20;
 sensor_distance=10;
 
